@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}
+  <title>Home page</title>
+{% endblock %}
+{% block content %}
+  <h1>Posts 📝<a class="btn btn-primary" style="float: right" href="{% url 'comments:comment-create' %}">+</a></h1>
+  <hr>
+  {% if comment_list %}
+  <table class="table">
+    <tr>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Created at</th>
+      <th>Text</th>
+    </tr>
+    {% for comment in comment_list %}
+      <tr>
+        <td>{{ comment.username }}</td>
+        <td>{{ comment.email }}</td>
+        <td>{{ comment.created_time }}</td>
+        <td>{{ comment.text }}</td>
+        <td><a class="btn btn-secondary" href="{% url 'comments:comment-create' %}">Reply
+</a></td>
+      </tr>
+    {% endfor %}
+  </table>
+
+  {% else %}
+    No comments yet 😅
+  {% endif %}
+
+{% endblock %}
