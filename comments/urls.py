@@ -1,13 +1,11 @@
-from django.conf import settings
-from django.conf.urls.static import static
-from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
 
-from comments.views import CommentsListView, CommentsCreateView
+from comments.views import CommentsListView, CommentsCreateView, ReplyCreateView
 
 urlpatterns = [
     path("", CommentsListView.as_view(), name="comment-list"),
     path("comment/create/", CommentsCreateView.as_view(), name="comment-create"),
+    path("reply/create/<int:comment_id>/", ReplyCreateView.as_view(), name="reply-create"),
 ]
 
 app_name = "comments"
