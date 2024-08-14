@@ -16,13 +16,22 @@
     </tr>
     {% for comment in comment_list %}
       <tr>
-        <td>{{ comment.username }}</td>
-        <td>{{ comment.email }}</td>
+        <td>{{ comment.user.username }}</td>
+        <td>{{ comment.user.email }}</td>
         <td>{{ comment.created_time }}</td>
         <td>{{ comment.text }}</td>
-        <td><a class="btn btn-secondary" href="{% url 'comments:comment-create' %}">Reply
-</a></td>
+        <td><a class="btn btn-secondary" href="{% url 'comments:reply-create' comment.id %}">Reply
+            </a></td>
       </tr>
+      {% for reply in comment.replies.all %}
+        <tr>
+          <td style="padding-left: 40px;">{{ reply.user.username }}</td>
+          <td>{{ reply.user.email }}</td>
+          <td>{{ reply.created_time }}</td>
+          <td>{{ reply.text }}</td>
+          <td><a class="btn btn-secondary" href="{% url 'comments:reply-create' comment.id %}">Reply</a></td>
+        </tr>
+      {% endfor %}
     {% endfor %}
   </table>
 
